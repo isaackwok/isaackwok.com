@@ -12,7 +12,7 @@ function NavigationLink(props: ComponentProps<typeof Link>) {
 
 export function NavigationPanel() {
   return (
-    <div className="fixed top-[calc(10vh)] left-0 hidden items-center justify-center gap-4 p-4 sm:flex">
+    <div className="fixed top-1/2 left-0 hidden -translate-y-1/2 items-center justify-center gap-4 p-4 sm:flex">
       <div className="flex flex-col items-start gap-4">
         <NavigationLink href="#about">About</NavigationLink>
         <NavigationLink href="#experience">Experience</NavigationLink>
