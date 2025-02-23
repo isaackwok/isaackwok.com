@@ -8,12 +8,12 @@ export function Contact() {
         <a
           href="mailto:isaac.kwokch@gmail.com"
           target="_blank"
-          className="italic underline"
+          className="underline"
         >
           isaac.kwokch@gmail.com
         </a>
         <h1 className="mt-8 mb-4 text-4xl font-bold text-white">Links</h1>
-        <ol className="flex flex-col italic">
+        <ol className="flex flex-col">
           <li>
             <a
               href="https://github.com/isaackwok"

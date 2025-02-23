@@ -5,4 +5,5 @@ body {
   color: white;
   scroll-behavior: smooth;
   font-family: var(--font-pt-serif);
+  font-style: italic;
 }
