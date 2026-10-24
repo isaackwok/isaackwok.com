@@ -62,7 +62,6 @@
         </div>
         <a
             id="player-spotify"
-            href="#"
             target="_blank"
             rel="noopener noreferrer"
             class="shrink-0 text-xs text-hinata transition-colors hover:text-sumi"
@@ -170,6 +169,7 @@
         audio.pause();
         audio.removeAttribute("src");
         album = null;
+        spotifyEl.removeAttribute("href");
         root.hidden = true;
         syncBodyPadding();
         syncDots();
