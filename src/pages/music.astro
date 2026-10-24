@@ -7,6 +7,10 @@ import * as Music from "../components/Music";
 const albums = (await getCollection("music")).sort(
     (a, b) => a.data.order - b.data.order,
 );
+
+// First row at sm (3 columns). Below sm the grid is 2 columns, so the
+// third cover is the first of the next row.
+const eagerCoverCount = 3;
 ---
 
 <PageShell
@@ -20,7 +24,10 @@ const albums = (await getCollection("music")).sort(
     <Music.Grid>
         {
             albums.map((album, index) => (
-                <Music.Cover album={album.data} eager={index < 6} />
+                <Music.Cover
+                    album={album.data}
+                    eager={index < eagerCoverCount}
+                />
             ))
         }
     </Music.Grid>

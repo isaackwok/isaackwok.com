@@ -12,8 +12,13 @@
   /* 木漏れ日 komorebi — the light itself, glow only */
   --color-komorebi: #fbe9c4;
 
-  --font-display: "Shippori Mincho", "Hiragino Mincho ProN", "Yu Mincho", serif;
-  --font-body: "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+}
+
+/* inline so Tailwind does not resolve these at build time — the Font
+   component defines the variables, including the fallback stack. */
+@theme inline {
+  --font-display: var(--font-shippori);
+  --font-body: var(--font-zen-kaku);
 }
 
 @layer base {
@@ -23,7 +28,7 @@
   }
 
   body {
-    font-family: var(--font-body);
+    font-family: var(--font-zen-kaku);
     color: var(--color-sumi);
     background-color: var(--color-kami);
     -webkit-font-smoothing: antialiased;
@@ -80,7 +85,7 @@
 
 .prose h2,
 .prose h3 {
-  font-family: var(--font-display);
+  font-family: var(--font-shippori);
   font-weight: 500;
   letter-spacing: -0.01em;
   line-height: 1.6;

@@ -8,13 +8,13 @@
 ## Design system
 
 - Japanese minimalism: plain white background, warm ink text, no borders or divider rules — spacing does the structural work.
-- Color tokens (in `global.css`): `kami` white, `sumi` ink, `hai` secondary gray, `hinata` sunlight-gold links, `komorebi` pale glow (selection). Fonts: Shippori Mincho (display), Zen Kaku Gothic New (body), loaded from Google Fonts in `Layout.astro`.
+- Color tokens (in `global.css`): `kami` white, `sumi` ink, `hai` secondary gray, `hinata` sunlight-gold links, `komorebi` pale glow (selection). Fonts: Shippori Mincho (display, 400 and 500) and Zen Kaku Gothic New (body, 400 and 500), self-hosted with Astro's fonts API (`fonts` in `astro.config.mjs`, `<Font>` in `Layout.astro`) and subset to the characters the site renders (`src/lib/font-glyphs.ts`). Don't add a Google Fonts stylesheet, and don't drop the glyph subset — the full CJK slices are hundreds of files.
 - Sections use `Section.astro` with vertical kanji margin markers (`kanji` + `label` props).
 - Compound components: folders like `src/components/WorkExperience/` hold `List.astro` + `Row.astro` re-exported from `index.ts`, used as `<WorkExperience.List>` via `import * as WorkExperience` dot notation.
 
 ## Layout & pages
 
-- `Layout.astro` owns the entire `<head>`: canonical URL, Open Graph/Twitter meta (including the `public/og.png` social card), JSON-LD Person schema, fonts. Pages pass `title` / `description` props — never add meta tags in a page.
+- `Layout.astro` owns the entire `<head>`: canonical URL, Open Graph/Twitter meta (including the `public/og.jpg` social card), the articles RSS feed (`/rss.xml`), JSON-LD Person schema, fonts. Pages pass `title` / `description` props — never add meta tags in a page.
 - Every page renders inside `PageShell.astro` (wraps `Layout` and provides the centered `<main>` column, `Nav`, and the © footer with a build-time year) with a `PageHeader.astro` on top for subpages. Don't hand-roll the main/nav/footer frame in a page.
 - Page navigation fades via Astro's `<ClientRouter />`: old page out (0.3s), blank kami hold (0.15s), new page in (0.3s). Timing config in `Layout.astro`, keyframes in `global.css`.
 - Astro's default `compressHTML` strips whitespace between elements in rendered output — where a rendered space is load-bearing in a `.astro` template, write an explicit `{" "}` expression (see the article byline paragraphs). Verify spacing against rendered HTML, not the template source.

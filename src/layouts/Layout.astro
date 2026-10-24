@@ -1,4 +1,5 @@
 ---
+import { Font } from "astro:assets";
 import { ClientRouter } from "astro:transitions";
 
 import Player from "../components/Player.astro";
@@ -26,8 +27,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const ogLocale = lang === "zh-Hant" ? "zh_TW" : "en_US";
 
 // Article pages pass their hero as ogImage; everything else gets the
-// site-wide social card, whose fixed 1200x630 dimensions we can vouch for.
-const socialImage = ogImage ?? new URL("/og.png", Astro.site).toString();
+// site-wide social card (public/og.jpg, 1600×840).
+const socialImage = ogImage ?? new URL("/og.jpg", Astro.site).toString();
 const isDefaultSocialImage = !ogImage;
 
 const personSchema = {
@@ -90,12 +91,20 @@ const pageTransition = { forwards: pageFade, backwards: pageFade };
             content="width=device-width, initial-scale=1, viewport-fit=cover"
         />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="icon" href="/favicon.ico" sizes="32x32" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <meta name="generator" content={Astro.generator} />
         <meta name="theme-color" content="#ffffff" />
         <meta name="description" content={description} />
         <meta name="author" content="Isaac Kwok" />
         <link rel="canonical" href={canonicalURL} />
         <link rel="sitemap" href="/sitemap-index.xml" />
+        <link
+            rel="alternate"
+            type="application/rss+xml"
+            title="Articles — Isaac Kwok"
+            href={new URL("/rss.xml", Astro.site)}
+        />
         <title>{title}</title>
         <meta property="og:type" content={ogType} />
         <meta property="og:url" content={canonicalURL} />
@@ -104,8 +113,9 @@ const pageTransition = { forwards: pageFade, backwards: pageFade };
         <meta property="og:site_name" content="Isaac Kwok" />
         <meta property="og:locale" content={ogLocale} />
         <meta property="og:image" content={socialImage} />
-        {isDefaultSocialImage && <meta property="og:image:width" content="1200" />}
-        {isDefaultSocialImage && <meta property="og:image:height" content="630" />}
+        {isDefaultSocialImage && <meta property="og:image:width" content="1600" />}
+        {isDefaultSocialImage && <meta property="og:image:height" content="840" />}
+        {isDefaultSocialImage && <meta property="og:image:type" content="image/jpeg" />}
         {
             isDefaultSocialImage && (
                 <meta
@@ -131,11 +141,19 @@ const pageTransition = { forwards: pageFade, backwards: pageFade };
             type="application/ld+json"
             set:html={JSON.stringify(personSchema)}
         />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap"
-            rel="stylesheet"
+        <Font
+            cssVariable="--font-shippori"
+            preload={[
+                { weight: 400, style: "normal" },
+                { weight: 500, style: "normal" },
+            ]}
+        />
+        <Font
+            cssVariable="--font-zen-kaku"
+            preload={[
+                { weight: 400, style: "normal" },
+                { weight: 500, style: "normal" },
+            ]}
         />
         <ClientRouter />
     </head>

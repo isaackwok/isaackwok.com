@@ -40,7 +40,7 @@ const payload = JSON.stringify({
             >
                 <Image
                     src={album.artworkUrl}
-                    alt=""
+                    alt={`${album.title} — ${album.artist}`}
                     width={600}
                     height={600}
                     widths={[200, 400]}
@@ -61,7 +61,7 @@ const payload = JSON.stringify({
             >
                 <Image
                     src={album.artworkUrl}
-                    alt=""
+                    alt={`${album.title} — ${album.artist}`}
                     width={600}
                     height={600}
                     widths={[200, 400]}
